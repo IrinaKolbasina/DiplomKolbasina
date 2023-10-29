@@ -1,6 +1,7 @@
 import com.codeborne.selenide.SelenideElement;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
+import lombok.SneakyThrows;
 import lombok.val;
 
 import java.util.Locale;
@@ -48,41 +49,27 @@ public class PageElements {
         return this;
     }
 
-    @Step("Ввод валидных значений месяца и года")
+    @Step("Ввод валидных месяца и года")
     public PageElements validMonthAndYearInput(Data.MonthAndYear monthAndYear) {
         monthInput.setValue(monthAndYear.getValidMonth());
         yearInput.setValue(monthAndYear.getValidYear());
         return this;
     }
 
-    @Step("Ввод невалидных значений месяца и года")
+    @Step("Ввод инвалидных месяца и года")
     public PageElements invalidMonthAndYearInput(Data.MonthAndYear monthAndYear) {
         monthInput.setValue(monthAndYear.getInvalidMonth());
         yearInput.setValue(monthAndYear.getInvalidYear());
         return this;
     }
 
-    @Step("Нажатие кнопки 'Продолжить'")
+    @Step("Нажать кнопку 'Продолжить'")
     public PageElements continueButtonClick() {
         continueButton.click();
         return this;
     }
 
-    @Step("Проверка отображения на экране всплывающего окна подтверждения действия")
-    public PageElements successNotificationVisible() {
-        // successNotification.waitUntil(visible, 10000);
-        errorNotification.shouldNotBe(visible);
-        return this;
-    }
-
-    @Step("Проверка отображения на экране всплывающего окна отказа в действии")
-    public PageElements errorNotificationVisible() {
-        // errorNotification.waitUntil(visible, 10000);
-        successNotification.shouldNotBe(visible);
-        return this;
-    }
-
-    @Step("Проверка видимости ошибки ввода значения в поле месяц и год")
+    @Step("Проверка видимости ошибки корректного ввода в поле месяц и год")
     public PageElements monthAndYearError() {
         monthError.shouldBe(visible);
         yearError.shouldBe(visible);
@@ -91,7 +78,7 @@ public class PageElements {
         return this;
     }
 
-    @Step("Проверка ввода случайного имени и кода CVC/CVV")
+    @Step("Ввод случайного имени и CVC/CVV")
     public PageElements fakerNameAndCvcInput() {
         val faker = new Faker(new Locale("ru"));
         nameInput.setValue(faker.name().fullName());
@@ -99,34 +86,34 @@ public class PageElements {
         return this;
     }
 
-    @Step("Нажатие кнопки 'Купить'")
+    @Step("Нажать кнопку 'Купить'")
     public PageElements buyButtonClick() {
         buyButton.shouldBe(visible).click();
         return this;
     }
 
-    @Step("Нажатие кнопки 'Купить в кредит'")
+    @Step("Нажать кнопку 'Купить в кредит'")
     public PageElements creditBuyButtonClick() {
         creditBuyButton.shouldBe(visible).click();
         return this;
     }
 
-    @Step("Ввод предзаданного значения номера карты 1")
+    @Step("Ввод указанной в тестах карты №1")
     public PageElements cardOneInput(Data.ListCards listCards) {
-        cardInput.waitUntil(visible, 1000).setValue(listCards.getCard1());
+        cardInput.setValue(listCards.getCard1());
         return this;
     }
 
-    @Step("Ввод предзаданного значения номера карты 2")
+    @Step("Ввод указанной в тестах карты №2")
     public PageElements cardTwoInput(Data.ListCards listCards) {
-        cardInput.waitUntil(visible, 1000).setValue(listCards.getCard2());
+        cardInput.setValue(listCards.getCard2());
         return this;
     }
 
-    @Step("Ввод случайного номера карты")
+    @Step("Ввод случайной карты")
     public PageElements fakerCardInput() {
         val faker = new Faker();
-        cardInput.waitUntil(visible, 1000).setValue(faker.numerify("#### #### #### ####"));
+        cardInput.setValue(faker.numerify("#### #### #### ####"));
         return this;
     }
 }
