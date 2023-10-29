@@ -1,0 +1,17 @@
+Thumbs.db*
+.DS_Store*
+node_modules
+.idea
+target
+*.iml
+.gradle
+*.ibt
+binlog.*
+data_mysql/
+build/
+*.log
+.allure/
+
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
