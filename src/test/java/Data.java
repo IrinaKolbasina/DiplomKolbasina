@@ -12,7 +12,7 @@ public class Data {
     }
 
     public static MonthAndYear getMonthAndYear() {
-        return new MonthAndYear("10", "22", "19", "30");
+        return new MonthAndYear("10", "24", "19", "19");
     }
 
     @Value

@@ -13,15 +13,15 @@ public class PageElements {
     private SelenideElement buyButton = $(byText("Купить"));
     private SelenideElement creditBuyButton = $(byText("Купить в кредит"));
     private SelenideElement cardInput = $("[placeholder='0000 0000 0000 0000']");
-    private SelenideElement monthInput = $("[placeholder='08']");
+    private SelenideElement monthInput = $("[placeholder='10']");
     private SelenideElement monthError = $$("[class=input__inner]").findBy(text("Месяц"))
             .$(withText("Неверно указан срок действия карты"));
-    private SelenideElement yearInput = $("[placeholder='22']");
+    private SelenideElement yearInput = $("[placeholder='24']");
     private SelenideElement yearError = $$("[class=input__inner]").findBy(text("Год"))
             .$(withText("Неверно указан срок действия карты"));
     private SelenideElement nameInput = $$("[class=input__inner]").findBy(text("Владелец"))
             .$("[class=input__control]");
-    private SelenideElement cvcInput = $("[placeholder='999']");
+    private SelenideElement cvcInput = $("[placeholder='888']");
     private SelenideElement continueButton = $(byText("Продолжить"));
     private SelenideElement errorNotification = $(withText("Банк отказал в проведении операции"));
     private SelenideElement successNotification = $(withText("Операция одобрена Банком"));
@@ -48,14 +48,14 @@ public class PageElements {
         return this;
     }
 
-    @Step("Ввод валидных параметров месяца и года")
+    @Step("Ввод валидных значений месяца и года")
     public PageElements validMonthAndYearInput(Data.MonthAndYear monthAndYear) {
         monthInput.setValue(monthAndYear.getValidMonth());
         yearInput.setValue(monthAndYear.getValidYear());
         return this;
     }
 
-    @Step("Ввод невалидных параметров месяца и года")
+    @Step("Ввод невалидных значений месяца и года")
     public PageElements invalidMonthAndYearInput(Data.MonthAndYear monthAndYear) {
         monthInput.setValue(monthAndYear.getInvalidMonth());
         yearInput.setValue(monthAndYear.getInvalidYear());
@@ -70,14 +70,14 @@ public class PageElements {
 
     @Step("Проверка отображения на экране всплывающего окна подтверждения действия")
     public PageElements successNotificationVisible() {
-       // successNotification.waitUntil(visible, 10000);
+        // successNotification.waitUntil(visible, 10000);
         errorNotification.shouldNotBe(visible);
         return this;
     }
 
-    @Step("Проверка отображения на экране всплывающего окна отказа действия")
+    @Step("Проверка отображения на экране всплывающего окна отказа в действии")
     public PageElements errorNotificationVisible() {
-       // errorNotification.waitUntil(visible, 10000);
+        // errorNotification.waitUntil(visible, 10000);
         successNotification.shouldNotBe(visible);
         return this;
     }
@@ -113,20 +113,20 @@ public class PageElements {
 
     @Step("Ввод предзаданного значения номера карты 1")
     public PageElements cardOneInput(Data.ListCards listCards) {
-      //  cardInput.waitUntil(visible, 1000).setValue(listCards.getCard1());
+        cardInput.waitUntil(visible, 1000).setValue(listCards.getCard1());
         return this;
     }
 
     @Step("Ввод предзаданного значения номера карты 2")
     public PageElements cardTwoInput(Data.ListCards listCards) {
-      //  cardInput.waitUntil(visible, 1000).setValue(listCards.getCard2());
+        cardInput.waitUntil(visible, 1000).setValue(listCards.getCard2());
         return this;
     }
 
     @Step("Ввод случайного номера карты")
     public PageElements fakerCardInput() {
         val faker = new Faker();
-     //   cardInput.waitUntil(visible, 1000).setValue(faker.numerify("#### #### #### ####"));
+        cardInput.waitUntil(visible, 1000).setValue(faker.numerify("#### #### #### ####"));
         return this;
     }
 }
